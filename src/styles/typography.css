@@ -1,0 +1,15 @@
+@font-face {
+  font-family: 'Roboto-Regular';
+  src: url('../assets/fonts/Roboto-Regular.ttf');
+}
+
+@font-face {
+  font-family: 'Roboto-Bold';
+  src: url('../assets/fonts/Roboto-Bold.ttf');
+}
+
+:root {
+  --font-small: clamp(0.75rem, 0.75vw, 1rem) 'Roboto-Regular', sans-serif;
+  --font-medium: clamp(0.9rem, 0.85vw, 1.5rem) 'Roboto-Regular', sans-serif;
+  --font-large: clamp(1rem, 1.15vw, 1.5rem) 'Roboto-Bold', sans-serif;
+}
