@@ -11,11 +11,6 @@ export const Group = styled.div`
 export const Label = styled.label`
   color: ${colors.textColor};
   font: var(--font-medium);
-  /* font-family: Roboto;
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal; */
 `;
 
 export const Input = styled.input`
