@@ -1,10 +1,32 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
+import SignUp from '../pages/SignUp';
+
+// eslint-disable-next-line react/prop-types
+const ProtectedRoute = ({ isLoggedIn, children }) => {
+  if (!isLoggedIn) {
+    return <Navigate to="/" replace />;
+  }
+
+  return children;
+};
 
 export const AppRouter = () => {
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<h1>Codeleap</h1>} />
+        <Route path="/" element={<SignUp />} />
+        <Route
+          path="/posts"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn}>
+              <div>Posts</div>
+            </ProtectedRoute>
+          }
+        />
       </Routes>
     </BrowserRouter>
   );
