@@ -5,7 +5,7 @@ import toast from 'react-hot-toast';
 import Form from '../Form';
 import InputGroup from '../InputGroup';
 import Button from '../Button';
-import TextareaGroup from '../textareaGroup';
+import TextareaGroup from '../TextareaGroup';
 import Post from './Post';
 
 import axios from '../../services/axios';

@@ -8,7 +8,7 @@ import Form from '../../Form';
 import Button from '../../Button';
 import Modal from '../../Modal';
 import InputGroup from '../../InputGroup';
-import TextareaGroup from '../../textareaGroup';
+import TextareaGroup from '../../TextareaGroup';
 import toast from 'react-hot-toast';
 
 import { MdDeleteForever } from 'react-icons/md';
