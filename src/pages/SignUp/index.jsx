@@ -1,5 +1,6 @@
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Button from '../../components/Button';
 import InputGroup from '../../components/InputGroup';
@@ -7,14 +8,23 @@ import InputGroup from '../../components/InputGroup';
 import * as S from './styles';
 
 const SignUp = () => {
+  const navigate = useNavigate();
   const dispatch = useDispatch();
+  const auth = useSelector((state) => state.auth);
   const [username, setUsername] = useState('');
+
   const handleSignUp = (e) => {
     e.preventDefault();
 
     if (!username.trim()) return;
     dispatch({ type: 'SIGNUP_REQUEST', payload: { username } });
   };
+
+  useEffect(() => {
+    if (auth.isLoggedIn) {
+      navigate('/home');
+    }
+  }, [auth.isLoggedIn]);
 
   return (
     <S.Container>
