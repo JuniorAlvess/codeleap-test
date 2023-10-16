@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import SignUp from '../pages/SignUp';
+import Home from '../pages/Home';
 
 // eslint-disable-next-line react/prop-types
 const ProtectedRoute = ({ isLoggedIn, children }) => {
@@ -20,10 +21,10 @@ export const AppRouter = () => {
       <Routes>
         <Route path="/" element={<SignUp />} />
         <Route
-          path="/posts"
+          path="/home"
           element={
             <ProtectedRoute isLoggedIn={isLoggedIn}>
-              <div>Posts</div>
+              <Home />
             </ProtectedRoute>
           }
         />

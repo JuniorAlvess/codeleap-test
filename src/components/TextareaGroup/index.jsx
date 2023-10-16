@@ -1,12 +1,11 @@
 import * as S from './styles';
 
 // eslint-disable-next-line react/prop-types
-const InputGroup = ({ type, defaultValue, value, label, onChange, placeholder, isRequired }) => {
+const TextareaGroup = ({ label, defaultValue, value, onChange, placeholder, isRequired }) => {
   return (
     <S.Group>
       {label && <S.Label>{label}</S.Label>}
-      <S.Input
-        type={type || 'text'}
+      <S.Textarea
         placeholder={placeholder}
         defaultValue={defaultValue}
         value={value}
@@ -17,4 +16,4 @@ const InputGroup = ({ type, defaultValue, value, label, onChange, placeholder, i
   );
 };
 
-export default InputGroup;
+export default TextareaGroup;
