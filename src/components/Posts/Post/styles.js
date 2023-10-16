@@ -63,4 +63,9 @@ export const Paragraph = styled.p`
   font: var(--font-medium);
 
   margin: 16px 0 0;
+
+  .post-skeleton {
+    display: flex;
+    flex-direction: column;
+  }
 `;

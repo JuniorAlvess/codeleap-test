@@ -1,5 +1,8 @@
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
+import { usePosts } from '../../../contexts/PostsContext';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 import Form from '../../Form';
 import Button from '../../Button';
@@ -22,6 +25,7 @@ const Post = ({ user, id, title, content, dateTime }) => {
   const [titleEdit, setTitleEdit] = useState('');
   const [contentEdit, setContentEdit] = useState('');
   const username = useSelector((state) => state.auth.user);
+  const { handleGetPosts, isLoading } = usePosts();
 
   const targetDate = new Date(dateTime);
   function getTimeDifference(targetDate) {
@@ -53,14 +57,15 @@ const Post = ({ user, id, title, content, dateTime }) => {
       throw 'Please fill in the title or content field.';
 
     const data = {
-      title: titleEdit,
-      content: contentEdit,
+      title: titleEdit || title,
+      content: contentEdit || content,
     };
 
     try {
       await axios.patch(`/careers/${id}/`, data);
       toast.success('Post updated successfully!');
       setIsOpenEditPostModal(false);
+      handleGetPosts('/careers/');
     } catch (err) {
       toast.error(err);
       setIsOpenEditPostModal(false);
@@ -75,6 +80,7 @@ const Post = ({ user, id, title, content, dateTime }) => {
       await axios.delete(`/careers/${id}/`);
       toast.success('Post deleted successfully!');
       setIsOpenDeletePostModal(false);
+      handleGetPosts('/careers/');
     } catch (err) {
       toast.error(err);
       setIsOpenDeletePostModal(false);
@@ -84,7 +90,7 @@ const Post = ({ user, id, title, content, dateTime }) => {
   return (
     <S.Container>
       <S.Header>
-        <h2>{title}</h2>
+        <h2>{isLoading ? <Skeleton width={70} /> : title}</h2>
         {username === user && (
           <span>
             <MdDeleteForever
@@ -98,12 +104,14 @@ const Post = ({ user, id, title, content, dateTime }) => {
       <S.Content>
         {user && (
           <span>
-            <strong>{`@${user}`}</strong>
-            <b>{getTimeDifference(targetDate)}</b>
+            <strong>{isLoading ? <Skeleton width={50} /> : `@${user}`}</strong>
+            <b>{isLoading ? <Skeleton width={30} /> : getTimeDifference(targetDate)}</b>
           </span>
         )}
 
-        <S.Paragraph>{content}</S.Paragraph>
+        <S.Paragraph>
+          {isLoading ? <Skeleton count={3} containerClassName="post-skeleton" /> : content}
+        </S.Paragraph>
       </S.Content>
 
       {isOpenDeletePostModal && (
@@ -131,12 +139,14 @@ const Post = ({ user, id, title, content, dateTime }) => {
             <InputGroup
               label="Title"
               placeholder="Hello world"
-              onChange={(e) => setTitleEdit(e.target.value)}
+              defaultValue={title}
+              onChange={(e) => setTitleEdit(e.target.value.trim())}
             />
             <TextareaGroup
               label="Content"
               placeholder="Content here"
-              onChange={(e) => setContentEdit(e.target.value)}
+              defaultValue={content}
+              onChange={(e) => setContentEdit(e.target.value.trim())}
             />
             <span>
               <Button text="Cancel" onClick={() => setIsOpenEditPostModal(false)} />
