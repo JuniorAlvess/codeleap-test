@@ -6,6 +6,7 @@ function generateColorPalette() {
   const textColor = '#000';
   const bgMainScreenColor = '#DDD';
   const opaqueColor = '#CCC';
+  const grey = '#777'
 
   return {
     primary,
@@ -15,6 +16,7 @@ function generateColorPalette() {
     textColor,
     bgMainScreenColor,
     opaqueColor,
+    grey
   };
 }
 
