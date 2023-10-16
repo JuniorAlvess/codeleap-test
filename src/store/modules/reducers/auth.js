@@ -25,7 +25,7 @@ const auth = (state = initialState, action) => {
     };
 
     case types.SIGNUP_FAILURE: {
-      const newState = { ...state }
+      const newState = { ...initialState }
       newState.isLoading = false
 
       return newState
