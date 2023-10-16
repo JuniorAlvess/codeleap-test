@@ -1,5 +1,29 @@
 @import url(./typography.css);
 
+
+html {
+  scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+  height: 0;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: invisible;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7695EC;
+  border-radius: 1rem;
+  transition: 0.2s ease-in-out;
+}
+
+::-webkit-scrollbar-thumb:active {
+  background: #7695EC;
+}
+
 body {
   background: #ddd;
   padding: 0;
